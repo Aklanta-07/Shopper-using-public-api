@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="title" content="Shopper - Your Online Shopping Destination">
+    <meta name="description" content="Shopper is a modern online shopping platform offering a wide range of products, secure checkout, and a seamless user experience.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Shopper</title>
+   <link href="images/favicon-32x32.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/styles/index.css">
+</head>
+<body classs="container-fluid" onload="bodyLoad()">
+   <script src="../node_modules/jquery/dist/jquery.js"></script>
+   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+   <script src="../src/scripts/index.js"></script>
+
+   <header>
+     <div class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #222 60%, #ffd700 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+        <div class="container-fluid py-2">
+            <span class="navbar-brand fw-bold fs-2 text-warning">Shopper.</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="me-3 text-warning fs-4"><span class="bi bi-person" data-bs-toggle="modal" data-bs-target="#login"></span></a>
+                    <a href="#" class="me-3 text-warning fs-4"><span class="bi bi-search"></span></a>
+                    <button onclick="ShowCart()" class="btn btn-warning position-relative" data-bs-toggle="modal" data-bs-target="#cart">
+                        <span class="bi bi-cart text-dark fw-bold"> Your Cart</span>
+                        <span class="badge bg-danger rounded-circle position-absolute top-0 end-0" id="lblCount">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h3 class="text-white">Login</h3>
+                        <button class="btn btn-close bg-light" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                       <form class="form-control" method="post">
+    <label class="form-label" for="username">Name</label>
+    <input 
+        class="form-control" 
+        type="text" 
+        name="username" 
+        autofocus 
+        placeholder="Enter your name"
+        pattern="[A-Za-z ]{2,}" 
+        required
+        title="Name must be at least 2 letters and contain only letters and spaces."
+    >
+
+    <label class="form-label" for="mobileno">Mobile Number</label>
+    <div class="input-group">
+        <select id="countryCode" class="form-select form-select-sm" style="max-width: 100px;">
+            <option value="IN" selected>IN+91</option>
+            <option value="US">US+1</option>
+            <option value="UK">UK+44</option>
+            <option value="RUS">RUS+7</option>
+            <option value="AUS">AUS+61</option>
+        </select>
+        <input 
+            id="mobileInput"
+            class="form-control" 
+            type="text" 
+            name="mobileno" 
+            placeholder="Enter your mobile number"
+            required
+            title="Enter a valid mobile number."
+        >
+    </div>
+
+    <label class="form-label" for="Email">Email</label>
+    <input 
+        class="form-control" 
+        type="email" 
+        name="Email" 
+        placeholder="Enter your email address"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        required
+        title="Enter a valid email address."
+    >
+
+    <label class="form-label" for="Password">Password</label>
+    <input 
+        class="form-control" 
+        type="password" 
+        name="Password" 
+        placeholder="Enter your password"
+        pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}" 
+        required
+        title="Password must be at least 6 characters, include letters, numbers, and at least one special character (!@#$%^&*)."
+    >
+
+    <label class="form-label" for="dob">DOB</label>
+    <input 
+        class="form-control" 
+        type="date" 
+        name="dob" 
+        min="2005-07-09" 
+        max="2030-07-09" 
+        required
+        title="Select your date of birth."
+    >
+    <div class="form-switch mt-2">
+        <input type="checkbox" class="form-check-input mt-3" required>
+        <label class="form-check-label">&nbsp;Term's & Condition</label>
+    </div>
+    <div class="modal-footer mt-2" style="background: linear-gradient(90deg, #222 60%, #ffd700 100%);">
+        <button class="btn btn-success">Submit</button>
+        <button class="btn btn-danger ms-4" type="reset">Cancel</button>
+    </div>
+</form>
+                    </div>
+                  
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="cart" data-bs-backdrop="static" data-bs-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-dark text-white">
+                            <h3 class="text-white">Your Cart Summary</h3>
+                            <button class="btn btn-close bg-light" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Preview</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+     </div>
+    <div class="mt-2">
+         <div class="carousel slide" data-bs-ride="carousel" id="ad">
+        <div class="carousel-inner">
+
+    <div class="carousel-indicators">  
+        <button class="active" data-bs-slide-to="0" data-bs-target="#ad" ></button>
+        <button data-bs-slide-to="1" data-bs-target="#ad"></button>
+        <button data-bs-slide-to="2" data-bs-target="#ad"></button>
+        <button data-bs-slide-to="3" data-bs-target="#ad"></button>
+    </div>
+            <button data-bs-slide="prev" data-bs-target="#ad" class="carousel-control-prev "><span class="carousel-control-prev-icon"></span></button>
+            <button data-bs-slide="next"  data-bs-target="#ad" class="carousel-control-next "><span class="carousel-control-next-icon"></span></button>
+            <div class="carousel-item active" data-bs-interval="4000">
+                <img src="images/slide-1.jpg" height="200">             
+            </div>
+             <div class="carousel-item" data-bs-interval="4000">
+                <img src="images/slide-2.jpg" height="200">
+             </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <img src="images/slide-3.jpg" height="200">
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+                <img src="images/slide-4.jpg" height="200">
+            </div>
+             
+        </div>
+ 
+
+      
+    </div>
+    </div>
+   </header>
+   <section>
+      <div class="section-part mt-2 row">
+         <nav class="col-2">
+        <div><label class="form-label fw-bold">Select Category</label> </div>
+        <div>
+            <select class="form-select" id="lstCategories" onchange="categoryChange()">
+
+            </select>
+        </div>
+       </nav>
+
+       <main class="col-10 d-flex flex-wrap overflow-auto" style="height:550px;">
+                <!-- Responsive Spinner -->
+                <div  class="w-100 d-flex justify-content-center align-items-center" style="height:auto; display:none;">
+                    <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;" id="spinner">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="products" class="d-flex flex-wrap w-100"></div>
+            </main>
+      </div>
+
+      <div class="mt-2">
+        <h1 class="text-center">Frequently Asked Questions</h1>
+    <div class="accordion" id="faqs">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class=" accordion-button btn btn-dark w-100 fw-bold  " data-bs-target="#q1" data-bs-toggle="collapse">What is Shopper ?</button>
+            </div>
+            <div class="accordion-collapse collapse" id="q1" data-bs-parent="#faqs">
+                <div class="accordion-body bg-dark text-white">
+                    <p>Shopper is an online shopping platform where you can browse products by category, view details, add items to your cart, and securely purchase your favorite products. It features a user-friendly interface, responsive design, and convenient cart management for a seamless shopping experience.</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item mt-2">
+            <div class="accordion-header">
+                <button class=" accordion-button btn btn-dark w-100 fw-bold" data-bs-target="#q2" data-bs-toggle="collapse" >How do I add products to my cart?</button>
+            </div>
+            <div class="accordion-collapse collapse" id="q2" data-bs-parent="#faqs">
+                <div class="accordion-body">
+                    <p>To add products to your cart, simply browse the available items, select the desired product, and click the "Add to Cart" button. You can view your cart at any time to review your selected items before proceeding to checkout.</p>
+
+
+                </div>
+            </div>
+        </div>
+          <div class="accordion-item mt-2">
+            <div class="accordion-header">
+                <button class=" accordion-button btn btn-dark w-100 fw-bold" data-bs-target="#q3" data-bs-toggle="collapse" >Can I view my cart before checkout?</button>
+            </div>
+            <div class="accordion-collapse collapse" id="q3" data-bs-parent="#faqs">
+                <div class="accordion-body">
+                    <p>Yes, you can view your cart at any time by clicking on the cart icon. This will show you a summary of the items you've added, along with the option to remove items or proceed to checkout.</p>
+
+
+                </div>
+            </div>
+         </div>
+            <div class="accordion-item mt-2">
+            <div class="accordion-header">
+                <button class=" accordion-button btn btn-dark w-100 fw-bold" data-bs-target="#q4" data-bs-toggle="collapse">How do I select a product category?</button>
+            </div>
+            <div class="accordion-collapse collapse" id="q4" data-bs-parent="#faqs">
+                <div class="accordion-body">
+                    <p>Use the "Select Category" dropdown on the left to filter products by category.</p>
+
+
+                </div>
+            </div>
+         </div>
+    </div>
+      </div>
+   </section>
+ <footer class="bg-dark text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <h2>Shopper.</h2>
+          <div> 
+        <a href="#" class="text-white me-2 fs-5"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-white me-2 fs-5"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-white me-2 fs-5"><i class="bi bi-instagram"></i></a>
+            </div>
+
+      </div>
+      <div class="col-3">
+    <dl>
+        <dt class="h5 fw-bold">SUPPORT</dt>
+        <dd class="fs-6 fw-bold">Contact us</dd>
+        <dd class="fs-6 fw-bold">FAQ</dd>
+        <dd class="fs-6 fw-bold">Size Guide</dd>
+        <dd class="fs-6 fw-bold">Shipping & Returns</dd>
+    </dl>
+       
+      </div>
+      <div class="col-3">
+        <dl>
+          <dt class="h5 fw-bold">COMPANY</dt>
+          <dd class="fs-6 fw-bold">About Us</dd>
+          <dd class="fs-6 fw-bold">Careers</dd>
+          <dd class="fs-6 fw-bold">Privacy Policy</dd>
+          <dd class="fs-6 fw-bold">Terms of Service</dd>
+        </dl>
+      </div>
+      <div class="col-3">
+        <dl>
+          <dt class="h5 fw-bold">CONTACT</dt>
+          <dd class="fs-6 fw-bold"><a href="mailto:info@shopper.com">info@shopper.com</a></dd>
+          <dd class="fs-6 fw-bold"><a href="tel:+15551234567">+1 (555) 123-4567</a></dd>
+          <dd class="fs-6 fw-bold">Address: 123, Main Street, City</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="btn btn-warning position-fixed" style="bottom: 32px; right: 32px; z-index: 999; display: none; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+    <span class="bi bi-arrow-up fs-4 fw-bold"></span>
+</button>
+
+</body>
+</html>
